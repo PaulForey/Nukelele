@@ -9,7 +9,7 @@ package
 	public class GameWorld extends World 
 	{
 		
-		public function GameWorld() 
+		public function GameWorld()
 		{
 			add(new Player(320, 240));
 		}

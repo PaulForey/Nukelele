@@ -15,9 +15,9 @@ package
 					speed : Number = 5;
 		public function Bullet(px: Number, py: Number, angle: Number, note: int)
 		{
-			sprite = new Stamp(SHOT, px, py);
+			sprite = new Stamp(SHOT);
 			super(px, py, sprite);
-			velocity = new Point(speed * Math.sin(angle), speed * Math.cos(angle));
+			velocity = new Point(speed * Math.sin(angle), -speed * Math.cos(angle));
 			//play sound looping somewhere in here or in update
 		}
 		
