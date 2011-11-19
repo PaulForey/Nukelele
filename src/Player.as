@@ -17,6 +17,7 @@ package
 		{
 			sprite = new Image(UKE);
 			super(px, py, sprite);
+			setHitbox(16, 48, -8, -8);
 		}
 		
 		public override function update():void
@@ -27,7 +28,10 @@ package
 			if (Input.pressed(Key.S)) world.add(new Bullet(x + 8, y + 8, 0, 1));
 			if (Input.pressed(Key.D)) world.add(new Bullet(x + 8, y + 8, 0, 2));
 			if (Input.pressed(Key.F)) world.add(new Bullet(x + 8, y + 8, 0, 3));
+			//if (collide("bullet", x, y) && (world as GameWorld).currentGameState = 1) {
+				//lose game
+		//		world.remove(this);
+			//}
 		}
 	}
-
 }
