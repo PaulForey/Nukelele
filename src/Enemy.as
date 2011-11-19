@@ -45,6 +45,7 @@ package
                         Audio.play("enemyDie");
 						world.remove(this);
 						world.remove(bul);
+						Main.currentScore += 5;
 						//particles
 					}
 				}
