@@ -18,7 +18,8 @@ package
 		private var bullets: Vector.<Bullet>,
 					enemies : Vector.<Enemy>,
 					spawn : int = 1,
-					player: Player;
+					player: Player,
+					order: Array = [];
 
 		public function GameWorld(thatDriver:SiONDriver)
 		{
@@ -75,12 +76,33 @@ package
 			}
 			player.setFrame([0, 1, 2, 1][beatCounter % 4]);
 			
+			// Stuff to happen every 4 bars
+            if(beatCounter % 64 == 0)
+            {
+                // stuff
+                trace("every four bars!");
+                if (gameState == 0) {
+					for (var i:int = 0; i < spawn; i++)
+						queueEnemy(new Enemy(int(Math.random() * 4)));
+					Audio.play("enemySpawn");
+                    setGameState(1);
+					spawn += int(1.1 * Math.random());
+					order = [0, 1, 2, 3];
+				}
+                else if(gameState == 1)
+                    setGameState(0);
+
+            //    Audio.changeMusic(currentGameState);
+            }
+			
             // Stuff to happen every 16 beats (should be at the start of one bar)
             if(gameState == 1)
             {
 				if((beatCounter % 16)==0){
 					var v : Vector.<Enemy> = new Vector.<Enemy>(),
-						toShoot: int = (beatCounter%64) / 16;
+						a : Array = order.splice(Math.random() * order.length, 1),
+						toShoot : int;
+					toShoot = a[i];
 					trace(toShoot);
 					getClass(Enemy, v);
 					
@@ -100,7 +122,7 @@ package
 					v = new Vector.<Enemy>();
 					getClass(Enemy, v);
 					trace(v.length);
-					if (Math.random() < 0.01 && v.length) {
+					if (Math.random() < 0.1 && v.length) {
 						e = v[int(v.length * Math.random())];
 						e.shoot(player.x, player.y);
 						//Audio.play("enemyShot" + e.note.toString());
@@ -108,24 +130,6 @@ package
 				}
             }
 
-
-            // Stuff to happen every 4 bars
-            if(beatCounter % 64 == 0)
-            {
-                // stuff
-                trace("every four bars!");
-                if (gameState == 0) {
-					for (var i:int = 0; i < spawn; i++)
-						queueEnemy(new Enemy(int(Math.random() * 4)));
-					Audio.play("enemySpawn");
-                    setGameState(1);
-					spawn += int(1.1*Math.random());
-				}
-                else if(gameState == 1)
-                    setGameState(0);
-
-                Audio.changeMusic(currentGameState);
-            }
             beatCounter++;
         }
 	}
