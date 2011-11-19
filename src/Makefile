@@ -8,11 +8,11 @@ endif
 
 all:
 	fcsh-wrap -optimize=true -output $(OUTPUT) -static-link-runtime-shared-libraries=true \
-		-compatibility-version=3.0.0 --target-player=10.2.0 -compiler.debug=$(DEBUG_FLAG) Main.as
+		-compatibility-version=3.0.0 --target-player=10.2.0 -compiler.debug=$(DEBUG_FLAG) -frames.frame=helloBob,Main Preloader.as
 
 win:
 	mxmlc -optimize=true -output $(OUTPUT) -static-link-runtime-shared-libraries=true \
-		-compatibility-version=3.0.0 --target-player=10.2.0 -compiler.debug=$(DEBUG_FLAG) Main.as
+		-compatibility-version=3.0.0 --target-player=10.2.0 -compiler.debug=$(DEBUG_FLAG) -frames.frame=helloBob,Main Preloader.as
 
 clean:
 	rm -f *~ $(OUTPUT) .FW.*

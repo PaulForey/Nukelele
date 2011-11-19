@@ -63,30 +63,26 @@ package
 			if (b)
             {
 				if (b.owner != 0)
-                {
-                    Audio.play("playerDie");
-					trace("you lose");
-					if (Main.currentScore > Main.bestScore)
-						Main.bestScore = Main.currentScore;
-                    FP.world = new GameWorld();
-                }
+                    die();
 			}
 
             var e:Enemy;
             e = collide("enemy", x, y) as Enemy
             if (e)
-            {
-                Audio.play("playerDie");
-                trace("you lose");
-                FP.world = new GameWorld();
-				if (Main.currentScore > Main.bestScore)
-					Main.bestScore = Main.currentScore;
-            }
+                die();
 		}
 		
 		public function setFrame(fraym:int):void
 		{
 			sprite.frame = fraym;
 		}
+
+        private function die():void
+        {
+            Audio.play("playerDie");
+            trace("you lost, sucka");
+            FP.world = new SplashWorld(true);
+            Main.currentScore = 0;
+        }
 	}
 }

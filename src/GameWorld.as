@@ -16,7 +16,7 @@ package
 
         private var driver:SiONDriver;
 
-        private var currentGameState:int = 0;
+        private var currentGameState:int = 1;
 
         private var beatCounter:int = 0;
 
@@ -46,8 +46,10 @@ package
 			player = new Player(320, 240);
 			add(player);
             Audio.play("playerSpawn");
-			current = new Text("current score = " + Main.currentScore.toString(), 160, 450);
-			best = new Text("best score = " + Main.bestScore.toString(), 480, 450);
+			current = new Text("current score = " + Main.currentScore.toString(), 120, 14);
+            current.centerOrigin();
+			best = new Text("best score = " + Main.bestScore.toString(), 510, 14);
+            best.centerOrigin();
 			addGraphic(current);
 			addGraphic(best);
 		}
@@ -71,6 +73,19 @@ package
 		{
 			enemies.push(e);
 		}
+
+        public override function update():void
+        {
+            super.update()
+
+            current.text = "current score = " + Main.currentScore.toString();
+
+            if (Main.currentScore > Main.bestScore)
+            {
+                Main.bestScore = Main.currentScore;
+                best.text = "best score = " + Main.bestScore.toString();
+            }
+        }
 
         private function onTimerInterrupt():void
         {
@@ -113,8 +128,11 @@ package
 
                 Audio.changeMusic(currentGameState);
             }
-			if (beatCounter % 4)
+
+            // You score!
+			if (beatCounter % 8 == 0)
 				Main.currentScore++;
+
             // Stuff to happen every 16 beats (should be at the start of one bar)
             if(gameState == 1)
             {

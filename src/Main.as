@@ -20,9 +20,9 @@ package
 		{
 			super(640, 480);
             Audio.init();
-			FP.world = new GameWorld();
-			FP.console.enable();
-            FP.console.toggleKey = Key.T;
+			FP.world = new SplashWorld();
+			//FP.console.enable();
+            //FP.console.toggleKey = Key.T;
 		}
 
 	}
