@@ -1,7 +1,7 @@
 package  
 {
 	import net.flashpunk.Entity;
-	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	/**
@@ -11,13 +11,13 @@ package
 	public class Player extends Entity 
 	{
 		[Embed(source = "assets/uke.png")] private const UKE: Class;
-		private var sprite:Image,
+		private var sprite:Spritemap,
 					speed: Number = 6,
 					loadtime: int = 30;
 					
 		public function Player(px:int, py:int) 
 		{
-			sprite = new Image(UKE);
+			sprite = new Spritemap(UKE,32,64);
 			super(px, py, sprite);
 			setHitbox(16, 48, -8, -8);
 		}
@@ -49,6 +49,11 @@ package
 				//lose game
 		//		world.remove(this);
 			//}
+		}
+		
+		public function setFrame(fraym:int):void
+		{
+			sprite.frame = fraym;
 		}
 	}
 }

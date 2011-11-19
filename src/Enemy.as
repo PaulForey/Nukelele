@@ -21,7 +21,6 @@ package
 			sprite = new Spritemap(ENEMY, 32, 32);
 			sprite.add("move", [0, 1, 2, 1], 30);
 			sprite.play("move");
-			sprite.
 			sprite.alpha = 0;
 			xphase = 0.01 + Math.random() / 40;
 			yphase = 0.01 + Math.random() / 20;
