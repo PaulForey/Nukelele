@@ -3,7 +3,6 @@ package
 	import flash.events.SecurityErrorEvent;
 	import net.flashpunk.World;
     import org.si.sion.*;
-	
 	/**
 	 * ...
 	 * @author Rob
@@ -18,7 +17,8 @@ package
 
 		private var bullets: Vector.<Bullet>,
 					enemies : Vector.<Enemy>,
-					spawn : int = 1;
+					spawn : int = 1,
+					player: Player;
 
 		public function GameWorld()
 		{
@@ -32,14 +32,15 @@ package
 
             driver.play("t" + Audio.tempo.toString() + ";");
 
-			add(new Player(320, 240));
+			player = new Player(320, 240);
+			add(player);
 		}
 
         public function get gameState():int {return currentGameState;}
 		
 		public function queueBullet(b:Bullet):void
 		{
-			bullets.push(b)
+			bullets.push(b);
 		}
 		
 		public function queueEnemy(e:Enemy):void
@@ -68,11 +69,17 @@ package
 			while (enemies.length) {
 				(enemies.pop()).setFrame([0,1,2,2][beatCounter % 4]);
 			}
+			player.setFrame([0, 1, 2, 1][beatCounter % 4]);
+			
             // Stuff to happen every 16 beats (should be at the start of one bar)
-            if(beatCounter % 16 == 0)
+            if(gameState == 1 && !(beatCounter % 4))
             {
-                // stuff
-                trace("every bar!");
+				var v : Vector.<Enemy> = new Vector.<Enemy>,
+					toShoot : int = Math.random() * 4;
+				getClass(Enemy, v);
+				while (enemies.length) {
+					(enemies.pop()).shoot(player.x, player.y);
+				}
             }
 
             // Stuff to happen every 4 bars
@@ -90,7 +97,7 @@ package
                 else if(gameState == 1)
                     setGameState(0);
 
-                Audio.changeMusic(currentGameState);
+                //Audio.changeMusic(currentGameState);
             }
             beatCounter++;
         }

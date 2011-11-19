@@ -29,7 +29,7 @@ package
 			loadtimer = loadtimer > 0? loadtimer-1:0;
 			x += speed * (int(Input.check(Key.RIGHT)) - int(Input.check(Key.LEFT)));
 			y += speed * (int(Input.check(Key.DOWN)) - int(Input.check(Key.UP)));
-			if(!loadtimer){
+			if((world as GameWorld).gameState == 0 && !loadtimer){
 				if (Input.pressed(Key.A)) {
 					(world as GameWorld).queueBullet(new Bullet(x + 8, y + 8, 0, 0));
 					loadtimer = LOADTIME;

@@ -30,6 +30,11 @@ package
 			time = 0;
 		}
 		
+		public function shoot(px: Number, py: Number): void
+		{
+			(world as GameWorld).queueBullet(new Bullet(x, y, Math.atan2(py - y, px - x) + Math.random() * 0.1, note));
+		}
+		
 		public override function update(): void
 		{
 			if (onscreen) {
