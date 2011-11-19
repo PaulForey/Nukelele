@@ -1,4 +1,4 @@
-OUTPUT := ../bin/nukulele.swf
+OUTPUT := ../bin/nukelele.swf
 
 ifdef DEBUG
 DEBUG_FLAG := true
@@ -8,11 +8,11 @@ endif
 
 all:
 	fcsh-wrap -optimize=true -output $(OUTPUT) -static-link-runtime-shared-libraries=true \
-		-compatibility-version=3.0.0 --target-player=10.0.0 -compiler.debug=$(DEBUG_FLAG) -use-network Main.as
+		-compatibility-version=3.0.0 --target-player=10.2.0 -compiler.debug=$(DEBUG_FLAG) -use-network Main.as
 
 win:
 	mxmlc -optimize=true -output $(OUTPUT) -static-link-runtime-shared-libraries=true \
-		-compatibility-version=3.0.0 --target-player=10.0.0 -compiler.debug=$(DEBUG_FLAG) -use-network Main.as
+		-compatibility-version=3.0.0 --target-player=10.2.0 -compiler.debug=$(DEBUG_FLAG) -use-network Main.as
 
 clean:
 	rm -f *~ $(OUTPUT) .FW.*

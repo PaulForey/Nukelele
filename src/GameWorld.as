@@ -20,7 +20,7 @@ package
             driver.setBeatCallbackInterval(1);
             driver.setTimerInterruption(1, onTimerInterrupt);
 
-            Audio.init();
+            Audio.init(driver);
 
             driver.play("t" + Audio.tempo.toString() + ";");
 
@@ -39,8 +39,6 @@ package
 
         private function onTimerInterrupt():void
         {
-            //var beatIndex:int = beatCounter % 16;
-
             // Stuff to happen every 16 beats (should be at the start of one bar)
             if(beatCounter % 16 == 0)
             {
@@ -53,12 +51,12 @@ package
             {
                 // stuff
                 trace("every four bars!");
-                if(gameState == 0)
+                if(currentGameState == 0)
                     setGameState(1);
-                else if(gameState == 1)
+                else if(currentGameState == 1)
                     setGameState(0);
 
-                Audio.changeMusic(gameState);
+                Audio.changeMusic(currentGameState);
             }
 
             beatCounter++;
