@@ -34,6 +34,7 @@ package
 
 			player = new Player(320, 240);
 			add(player);
+            Audio.play("playerSpawn");
 		}
 
         public function get gameState():int {return currentGameState;}
