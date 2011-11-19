@@ -25,12 +25,12 @@ package
 					player: Player,
 					order: Array = [];
 
-		public function GameWorld(thatDriver:SiONDriver)
+		public function GameWorld()
 		{
             background = new Spritemap(BACKGROUND, 640, 480);
             background.setFrame(0);
             addGraphic(background);
-            driver = thatDriver;
+            driver = Main.driver;
 
             driver.setBeatCallbackInterval(1);
             driver.setTimerInterruption(1, onTimerInterrupt);
@@ -137,7 +137,7 @@ package
 					if (Math.random() < 0.04 && v.length) {
 						e = v[int(v.length * Math.random())];
 						e.shoot(player.x, player.y);
-						//Audio.play("enemyShot" + e.note.toString());
+						Audio.play("enemyShot" + e.note.toString());
 					}
 				}
             }
