@@ -18,9 +18,10 @@ package
 					speed : Number = 9;
 		public function Bullet(px: Number, py: Number, angle: Number, note: int, owner:int)
 		{
-			sprite = new Spritemap(SHOT, 8, 40);
+			sprite = new Spritemap(SHOT, 8, 64);
 			sprite.add("this", [note]);
 			sprite.play("this");
+			sprite.centerOrigin();
 			sprite.angle = -angle * (180 /  Math.PI);
 			super(px, py, sprite);
 			velocity = new Point(speed * Math.sin(angle), -speed * Math.cos(angle));
