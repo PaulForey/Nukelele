@@ -8,7 +8,7 @@ package
     public class Audio
     {
         // Public variables:
-        public static var tempo:int = 300;
+        public static var tempo:int = 160;
 
         // Private variables:
         private static var driver:SiONDriver;
@@ -65,8 +65,9 @@ package
 
             driver.bpm = tempo;
 
-            happyMML =  "%6@1   v13 o3  $c4 r4 c4 r4;";                 // Kick pattern
-            happyMML += "%6@2   v13 o3  $r4 c4 r4 c4;";                 // Snare pattern
+            happyMML =  "%6@1   v13 o3  $c4 c4 c4 c4;";                 // Kick pattern
+            happyMML += "%6@2   v14 o3  $r8 c8 r8 c8;";                 // Snare pattern
+            happyMML += "%6@2   v4  o3  $c16 c16 r16 c16;";             // Second Snare pattern
             happyMML += "%6@3   v13 o3  $c4 c4 c4 c4;";                 // Closed hat pattern
             happyMML += "%6@5   v13 o4  $[f8 r8 c8 r8]7 f8 c8 f8 e8;";  // Bass pattern
 

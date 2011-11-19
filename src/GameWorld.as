@@ -2,6 +2,7 @@ package
 {
 	import flash.events.SecurityErrorEvent;
 	import net.flashpunk.World;
+    import net.flashpunk.graphics.Spritemap;
     import org.si.sion.*;
 	/**
 	 * ...
@@ -9,6 +10,9 @@ package
 	 */
 	public class GameWorld extends World 
 	{
+        [Embed(source="assets/background.png")] private const BACKGROUND:Class;
+        private var background:Spritemap;
+
         private var driver:SiONDriver;
 
         private var currentGameState:int = 0;
@@ -23,6 +27,9 @@ package
 
 		public function GameWorld(thatDriver:SiONDriver)
 		{
+            background = new Spritemap(BACKGROUND, 640, 480);
+            background.setFrame(0);
+            addGraphic(background);
             driver = thatDriver;
 
             driver.setBeatCallbackInterval(1);
@@ -40,6 +47,14 @@ package
 
         public function get gameState():int {return currentGameState;}
 		
+        private function setGameState(newState:int):void
+        {
+            if(currentGameState == newState)
+                return;
+
+            currentGameState = newState;
+        }
+
 		public function queueBullet(b:Bullet):void
 		{
 			bullets.push(b);
@@ -49,13 +64,6 @@ package
 		{
 			enemies.push(e);
 		}
-        private function setGameState(newState:int):void
-        {
-            if(currentGameState == newState)
-                return;
-
-            currentGameState = newState;
-        }
 
         private function onTimerInterrupt():void
         {
@@ -86,13 +94,17 @@ package
 						queueEnemy(new Enemy(int(Math.random() * 4)));
 					Audio.play("enemySpawn");
                     setGameState(1);
+                    background.setFrame(0);
 					spawn += int(1.1 * Math.random());
 					order = [0, 1, 2, 3];
 				}
                 else if(gameState == 1)
+                {
                     setGameState(0);
+                    background.setFrame(1);
+                }
 
-            //    Audio.changeMusic(currentGameState);
+                Audio.changeMusic(currentGameState);
             }
 			
             // Stuff to happen every 16 beats (should be at the start of one bar)
@@ -122,10 +134,10 @@ package
 					v = new Vector.<Enemy>();
 					getClass(Enemy, v);
 					trace(v.length);
-					if (Math.random() < 0.1 && v.length) {
+					if (Math.random() < 0.04 && v.length) {
 						e = v[int(v.length * Math.random())];
 						e.shoot(player.x, player.y);
-						//Audio.play("enemyShot" + e.note.toString());
+						Audio.play("enemyShot" + e.note.toString());
 					}
 				}
             }
