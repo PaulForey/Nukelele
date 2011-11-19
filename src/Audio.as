@@ -53,7 +53,7 @@ package
         private static var playerShot3:Sfx = new Sfx(SFX_PLAYERSHOT3);
 
         // Public Methods:
-        public static function init(thatDriver:SiONDriver):void
+        public static function init():void
         {
             enemySpawn.Load(enemySpawnData);
             enemySpawn.Cache();
@@ -61,7 +61,7 @@ package
             enemyDie.Load(enemyDieData);
             enemyDie.Cache();
 
-            driver = thatDriver;
+            driver = Main.driver;
 
             driver.bpm = tempo;
 

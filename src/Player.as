@@ -61,7 +61,8 @@ package
 				if (b.owner != 0)
                 {
                     Audio.play("playerDie");
-					trace("you lose");//FP.world = new GameWorld();
+					trace("you lose");
+                    FP.world = new GameWorld();
                 }
 			}
 
@@ -70,7 +71,8 @@ package
             if (e)
             {
                 Audio.play("playerDie");
-                trace("you lose");//FP.world = new GameWorld();
+                trace("you lose");
+                FP.world = new GameWorld();
             }
 		}
 		
