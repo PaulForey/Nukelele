@@ -10,6 +10,7 @@ package
 	public class Bullet extends Entity
 	{
 		[Embed(source = "assets/shot.png")] private const SHOT : Class;
+		public var note: int;
 		private var sprite: Stamp,
 					velocity: Point,
 					speed : Number = 5;
@@ -18,6 +19,9 @@ package
 			sprite = new Stamp(SHOT);
 			super(px, py, sprite);
 			velocity = new Point(speed * Math.sin(angle), -speed * Math.cos(angle));
+			type = "bullet";
+			this.note = note;
+			setHitbox(16, 16, 0, 0);
 			//play sound looping somewhere in here or in update
 		}
 		

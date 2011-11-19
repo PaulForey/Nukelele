@@ -16,6 +16,7 @@ package
 		{
 			super(640, 480);
 			FP.world = new GameWorld();
+			FP.console.enable();
 		}
 
 	}

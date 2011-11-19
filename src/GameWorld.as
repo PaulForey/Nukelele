@@ -12,6 +12,7 @@ package
 		public function GameWorld()
 		{
 			add(new Player(320, 240));
+			add(new Enemy(0, 120));
 		}
 		
 	}
