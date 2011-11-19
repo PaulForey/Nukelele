@@ -79,8 +79,10 @@ package
 				getClass(Enemy, v);
 				while (v.length) {
 					var e:Enemy = v.pop();
-					e.shoot(player.x, player.y);
-					trace("shooting");
+					if (e.note == toShoot) {
+						//***play enemy shoot sound***
+						e.shoot(player.x, player.y);
+					}
 				}
             }
 

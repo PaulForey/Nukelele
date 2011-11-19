@@ -10,9 +10,9 @@ package
 	public class Enemy extends Entity 
 	{
 		[Embed(source = "assets/enemy.png")] private const ENEMY:Class;
+		public var note: int;
 		private var onscreen: Boolean = false,
 					sprite: Spritemap,
-					note : int,
 					time : Number,
 					xfreq : Number,
 					yfreq : Number;
