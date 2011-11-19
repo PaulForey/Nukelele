@@ -49,7 +49,8 @@ package
 				}
 			}
 			var b:Bullet;
-			if (b = collide("bullet", x, y) as Bullet) {
+            b = collide("bullet", x, y) as Bullet
+			if (b) {
 				if (b.owner != 0)
 					trace("you lose");//FP.world = new GameWorld();
 			}

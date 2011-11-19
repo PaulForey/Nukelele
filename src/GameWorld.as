@@ -59,7 +59,10 @@ package
         {
 			while (bullets.length) {
 				var b:Bullet = bullets.pop();
-                Audio.play("playerShot" + b.note.toString());
+                if(b.owner == 0)
+                    Audio.play("playerShot" + b.note.toString());
+                else
+                    Audio.play("enemyShot" + b.note.toString());
                 add (b);
 			}
 			while (enemies.length) {

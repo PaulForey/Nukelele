@@ -31,6 +31,11 @@ package
         private static var enemySpawn:Bfxr = new Bfxr();
         private static var enemyDie:Bfxr = new Bfxr();
 
+        private static const enemyShot0:Array = new Array(53, presetVoices['lead36'], 2);
+        private static const enemyShot1:Array = new Array(57, presetVoices['lead36'], 2);
+        private static const enemyShot2:Array = new Array(60, presetVoices['lead36'], 2);
+        private static const enemyShot3:Array = new Array(64, presetVoices['lead36'], 2);
+
         [Embed(source="assets/sfx/playerSpawn.mp3")] private static const SFX_PLAYERSPAWN:Class;
         [Embed(source="assets/sfx/playerDie.mp3")] private static const SFX_PLAYERDIE:Class;
 
@@ -51,10 +56,10 @@ package
         public static function init(thatDriver:SiONDriver):void
         {
             enemySpawn.Load(enemySpawnData);
-            enemySpawn.CacheMutations(0.05, 4);
+            enemySpawn.Cache();
 
             enemyDie.Load(enemyDieData);
-            enemyDie.CacheMutations(0.05, 4);
+            enemyDie.Cache();
 
             driver = thatDriver;
 
@@ -87,11 +92,13 @@ package
 
         public static function play (sound:String):void
         {
-            if(Audio[sound] is Bfxr)
-                Audio[sound].Play(0.3);
+            var thisSound:Object = Audio[sound];
+            if(thisSound is Bfxr)
+                thisSound.Play(0.3);
+            else if (thisSound is Array)
+                driver.noteOn(thisSound[0], thisSound[1], thisSound[2]);
             else
-                Audio[sound].play();
-                trace("audio played!");
+                thisSound.play();
         }
 
         public static function changeMusic(gameState:int):void
