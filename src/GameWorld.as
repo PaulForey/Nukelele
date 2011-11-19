@@ -64,7 +64,10 @@ package
 			while (enemies.length) {
 				add(enemies.pop());
 			}
-
+			this.getClass(Enemy, enemies);
+			while (enemies.length) {
+				(enemies.pop()).setFrame(beatCounter % 4);
+			}
             // Stuff to happen every 16 beats (should be at the start of one bar)
             if(beatCounter % 16 == 0)
             {
