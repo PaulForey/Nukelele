@@ -12,10 +12,10 @@ package
 	{
 		[Embed(source = "assets/shotsheet.png")] private const SHOT : Class;
 		public var note: int,
-					owner: int;
+					owner: int; //0 == player, 1 == enemy
 		private var sprite: Spritemap,
 					velocity: Point,
-					speed : Number = 5;
+					speed : Number = 9;
 		public function Bullet(px: Number, py: Number, angle: Number, note: int, owner:int)
 		{
 			sprite = new Spritemap(SHOT, 8, 40);
@@ -36,8 +36,9 @@ package
 			x += velocity.x;
 			y += velocity.y;
 
-            if (y < -40)
+            if (y < -40 || y > 480 || x<-40 || x>640)
                 world.remove(this);
+			
 		}
 	}
 }

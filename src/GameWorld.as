@@ -72,7 +72,7 @@ package
 			player.setFrame([0, 1, 2, 1][beatCounter % 4]);
 			
             // Stuff to happen every 16 beats (should be at the start of one bar)
-            if(gameState == 1 && (beatCounter % 4)==0)
+            if(gameState == 1 && (beatCounter % 8)==0)
             {
 				var v : Vector.<Enemy> = new Vector.<Enemy>(),
 					toShoot : int = Math.random() * 4;
@@ -96,12 +96,12 @@ package
 						queueEnemy(new Enemy(int(Math.random() * 4)));
 					Audio.play("enemySpawn");
                     setGameState(1);
-					spawn++;
+					spawn += int(1.1*Math.random());
 				}
                 else if(gameState == 1)
                     setGameState(0);
 
-                Audio.changeMusic(currentGameState);
+                //Audio.changeMusic(currentGameState);
             }
             beatCounter++;
         }
