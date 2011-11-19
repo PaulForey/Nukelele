@@ -72,13 +72,17 @@ package
 			player.setFrame([0, 1, 2, 1][beatCounter % 4]);
 			
             // Stuff to happen every 16 beats (should be at the start of one bar)
-            if(gameState == 1 && !(beatCounter % 4))
+            if(gameState == 1 && (beatCounter % 4)==0)
             {
-				var v : Vector.<Enemy> = new Vector.<Enemy>,
+				var v : Vector.<Enemy> = new Vector.<Enemy>(),
 					toShoot : int = Math.random() * 4;
 				getClass(Enemy, v);
-				while (enemies.length) {
-					(enemies.pop()).shoot(player.x, player.y);
+				while (v.length) {
+					var e:Enemy = v.pop();
+					if (e.note == toShoot) {
+						//***play enemy shoot sound***
+						e.shoot(player.x, player.y);
+					}
 				}
             }
 

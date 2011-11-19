@@ -10,9 +10,9 @@ package
 	public class Enemy extends Entity 
 	{
 		[Embed(source = "assets/enemy.png")] private const ENEMY:Class;
+		public var note: int;
 		private var onscreen: Boolean = false,
 					sprite: Spritemap,
-					note : int,
 					time : Number,
 					xfreq : Number,
 					yfreq : Number;
@@ -32,7 +32,7 @@ package
 		
 		public function shoot(px: Number, py: Number): void
 		{
-			(world as GameWorld).queueBullet(new Bullet(x, y, Math.atan2(py - y, px - x) + Math.random() * 0.1, note));
+			(world as GameWorld).queueBullet(new Bullet(x, y, Math.atan2(px - x + 16, y - 32 - py) + Math.random() * 0.1, note, 1));
 		}
 		
 		public override function update(): void
@@ -41,8 +41,7 @@ package
 				//do update stuff
 				var bul:Bullet = collide("bullet", x, y) as Bullet;
 				if (bul) {
-					trace("collided");
-					if (bul.note == note){
+					if (bul.note == note && bul.owner!=1){
 						world.remove(this);
 						world.remove(bul);
 						//particles
