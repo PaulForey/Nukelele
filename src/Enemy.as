@@ -14,17 +14,16 @@ package
 					sprite: Spritemap,
 					note : int,
 					time : Number,
-					xphase : Number,
-					yphase : Number;
+					xfreq : Number,
+					yfreq : Number;
+
 		public function Enemy(note: int)
 		{
 			sprite = new Spritemap(ENEMY, 32, 32);
-			sprite.add("move", [0, 1, 2, 1], 30);
-			sprite.play("move");
 			sprite.alpha = 0;
-			xphase = 0.01 + Math.random() / 40;
-			yphase = 0.01 + Math.random() / 20;
-			super(288 + 288 * Math.sin(time * xphase), 120 + 120 * Math.sin(time * yphase), sprite);
+			xfreq = 0.01 + Math.random() / 105;
+			yfreq = 0.01 + Math.random() / 70;
+			super(288 + 288 * Math.sin(time * xfreq), 120 + 120 * Math.sin(time * yfreq), sprite);
 			FP.tween(sprite, { alpha: 1 }, 0.1, { complete: function():void{ onscreen = true; } } );
 			this.note = note;
 			setHitbox(16, 16, -8, -8);
@@ -45,9 +44,14 @@ package
 					}
 				}
 			}
-			x = 288 + 288 * Math.sin(time * xphase);
-			y = 120 + 120 * Math.sin(time * yphase);
+			x = 288 + 288 * Math.sin(time * xfreq);
+			y = 120 + 120 * Math.sin(time * yfreq);
 			time++;
 		}
+
+        public function setFrame(frame:int):void
+        {
+            sprite.frame = frame;
+        }
 	}
 }
