@@ -137,7 +137,7 @@ package
 					if (Math.random() < 0.04 && v.length) {
 						e = v[int(v.length * Math.random())];
 						e.shoot(player.x, player.y);
-						Audio.play("enemyShot" + e.note.toString());
+						//Audio.play("enemyShot" + e.note.toString());
 					}
 				}
             }
