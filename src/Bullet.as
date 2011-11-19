@@ -25,7 +25,7 @@ package
 			velocity = new Point(speed * Math.sin(angle), -speed * Math.cos(angle));
 			type = "bullet";
 			this.note = note;
-			setHitbox(16, 16, 0, 0);
+			setHitbox(8, 32, -4, 0);
 			//play sound looping somewhere in here or in update
 		}
 		

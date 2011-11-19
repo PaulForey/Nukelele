@@ -2,7 +2,7 @@ package
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
-	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	/**
 	 * ...
 	 * @author Rob
@@ -11,14 +11,16 @@ package
 	{
 		[Embed(source = "assets/enemy.png")] private const ENEMY:Class;
 		private var onscreen: Boolean = false,
-					sprite: Image,
+					sprite: Spritemap,
 					note : int,
 					time : Number,
 					xphase : Number,
 					yphase : Number;
 		public function Enemy(note: int)
 		{
-			sprite = new Image(ENEMY);
+			sprite = new Spritemap(ENEMY, 32, 32);
+			sprite.add("move", [0, 1, 2, 1], 30);
+			sprite.play("move");
 			sprite.alpha = 0;
 			xphase = 0.01 + Math.random() / 40;
 			yphase = 0.01 + Math.random() / 20;
