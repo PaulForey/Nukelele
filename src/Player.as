@@ -39,18 +39,22 @@ package
 				if (Input.pressed(Key.A)) {
 					(world as GameWorld).queueBullet(new Bullet(x + 8, y + 8, 0, 0,0));
 					loadtimer = LOADTIME;
+					Main.currentScore--;
 				}
 				if (Input.pressed(Key.S)) {
 					(world as GameWorld).queueBullet(new Bullet(x + 8, y + 8, 0, 1,0));
 					loadtimer = LOADTIME;
+					Main.currentScore--;
 				}
 				if (Input.pressed(Key.D)) {
 					(world as GameWorld).queueBullet(new Bullet(x + 8, y + 8, 0, 2,0));
 					loadtimer = LOADTIME;
+					Main.currentScore--;
 				}
 				if (Input.pressed(Key.F)) {
 					(world as GameWorld).queueBullet(new Bullet(x + 8, y + 8, 0, 3,0));
 					loadtimer = LOADTIME;
+					Main.currentScore--;
 				}
 			}
 
@@ -62,6 +66,8 @@ package
                 {
                     Audio.play("playerDie");
 					trace("you lose");
+					if (Main.currentScore > Main.bestScore)
+						Main.bestScore = Main.currentScore;
                     FP.world = new GameWorld();
                 }
 			}
@@ -73,6 +79,8 @@ package
                 Audio.play("playerDie");
                 trace("you lose");
                 FP.world = new GameWorld();
+				if (Main.currentScore > Main.bestScore)
+					Main.bestScore = Main.currentScore;
             }
 		}
 		

@@ -12,8 +12,9 @@ package
 	[Frame(factoryClass="Preloader")]
 	public class Main extends Engine 
 	{
-        public static var driver:SiONDriver = new SiONDriver();
-
+        public static var driver:SiONDriver = new SiONDriver(),
+						  currentScore: int = 0,
+						  bestScore: int = 0;
 		public function Main():void 
 		{
 			super(640, 480);

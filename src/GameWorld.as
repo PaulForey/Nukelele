@@ -1,6 +1,7 @@
 package  
 {
 	import flash.events.SecurityErrorEvent;
+	import net.flashpunk.graphics.Text;
 	import net.flashpunk.World;
     import net.flashpunk.graphics.Spritemap;
     import org.si.sion.*;
@@ -23,7 +24,9 @@ package
 					enemies : Vector.<Enemy>,
 					spawn : int = 1,
 					player: Player,
-					order: Array = [];
+					order: Array = [],
+					current: Text,
+					best: Text;
 
 		public function GameWorld()
 		{
@@ -43,6 +46,10 @@ package
 			player = new Player(320, 240);
 			add(player);
             Audio.play("playerSpawn");
+			current = new Text("current score = " + Main.currentScore.toString(), 160, 450);
+			best = new Text("best score = " + Main.bestScore.toString(), 480, 450);
+			addGraphic(current);
+			addGraphic(best);
 		}
 
         public function get gameState():int {return currentGameState;}
@@ -106,7 +113,8 @@ package
 
                 Audio.changeMusic(currentGameState);
             }
-			
+			if (beatCounter % 4)
+				Main.currentScore++;
             // Stuff to happen every 16 beats (should be at the start of one bar)
             if(gameState == 1)
             {
