@@ -56,12 +56,9 @@ package
 
         private function onTimerInterrupt():void
         {
-            //var beatIndex:int = beatCounter % 16;
 			while (bullets.length) {
 				var b:Bullet = bullets.pop();
-                trace("audio about to play!");
                 Audio.play("playerShot" + b.note.toString());
-                trace("audio played!")
                 add (b);
 			}
 			while (enemies.length) {

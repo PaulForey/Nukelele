@@ -75,9 +75,7 @@ package
 
         public static function play (sound:String):void
         {
-            trace(sound);
             Audio[sound].play();
-            trace(Audio[sound]);
         }
 
         public static function changeMusic(gameState:int):void

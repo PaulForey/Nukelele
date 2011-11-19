@@ -33,6 +33,9 @@ package
 		{
 			x += velocity.x;
 			y += velocity.y;
+
+            if (y < -40)
+                world.remove(this);
 		}
 	}
 }
