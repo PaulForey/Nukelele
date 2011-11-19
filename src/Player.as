@@ -53,12 +53,25 @@ package
 					loadtimer = LOADTIME;
 				}
 			}
+
 			var b:Bullet;
             b = collide("bullet", x, y) as Bullet
-			if (b) {
+			if (b)
+            {
 				if (b.owner != 0)
+                {
+                    Audio.play("playerDie");
 					trace("you lose");//FP.world = new GameWorld();
+                }
 			}
+
+            var e:Enemy;
+            e = collide("enemy", x, y) as Enemy
+            if (e)
+            {
+                Audio.play("playerDie");
+                trace("you lose");//FP.world = new GameWorld();
+            }
 		}
 		
 		public function setFrame(fraym:int):void

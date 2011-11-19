@@ -32,7 +32,7 @@ package
 		
 		public function shoot(px: Number, py: Number): void
 		{
-			(world as GameWorld).queueBullet(new Bullet(x, y, Math.atan2(px - x - 16, y - 32 - py) + Math.random() * 0.1, note, 1));
+			(world as GameWorld).queueBullet(new Bullet(x+16, y+16, Math.atan2(px - x + 16, y - 32 - py) + Math.random() * 0.1, note, 1));
 		}
 		
 		public override function update(): void
