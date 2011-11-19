@@ -1,6 +1,6 @@
 package
 {
-    import net.flashpunk.FP;
+    import net.flashpunk.Sfx;
     import org.si.sion.*;
     import org.si.sion.utils.SiONPresetVoice;
 
@@ -24,17 +24,21 @@ package
 
 
         // Sound effects:
-
         //[Embed(source="assets/sfx/enemy_spawn.mp3")] private static var enemySpawn:Sound;
         //[Embed(source="assets/sfx/enemy_die.mp3")] private static var enemyDie:Sound;
 
         //[Embed(source="assets/sfx/player_spawn.mp3")] private static var playerSpawn:Sound;
         //[Embed(source="assets/sfx/player_die.mp3")] private static var playerSpawn:Sound;
 
-        //[Embed(source="assets/sfx/shot1")] private static var shot1:Sound;  // f
-        //[Embed(source="assets/sfx/shot2")] private static var shot2:Sound;  // a
-        //[Embed(source="assets/sfx/shot3")] private static var shot3:Sound;  // c
-        //[Embed(source="assets/sfx/shot4")] private static var shot4:Sound;  // e
+        [Embed(source="assets/sfx/playerShot0.mp3")] private static const SFX_PLAYERSHOT0:Class;  // f
+        [Embed(source="assets/sfx/playerShot1.mp3")] private static const SFX_PLAYERSHOT1:Class;  // a
+        [Embed(source="assets/sfx/playerShot2.mp3")] private static const SFX_PLAYERSHOT2:Class;  // c
+        [Embed(source="assets/sfx/playerShot3.mp3")] private static const SFX_PLAYERSHOT3:Class;  // e
+
+        private static var playerShot0:Sfx = new Sfx(SFX_PLAYERSHOT0);
+        private static var playerShot1:Sfx = new Sfx(SFX_PLAYERSHOT1);
+        private static var playerShot2:Sfx = new Sfx(SFX_PLAYERSHOT2);
+        private static var playerShot3:Sfx = new Sfx(SFX_PLAYERSHOT3);
 
 
         // Public Methods:
@@ -69,17 +73,20 @@ package
             sadData.setVoice(5, presetVoices['valsound.bass16']);   // bass      
         }
 
+        public static function play (sound:String):void
+        {
+            Audio[sound].play();
+        }
+
         public static function changeMusic(gameState:int):void
         {
             if(gameState == 0)
             {
-                // change music to scary
                 stopAllDriverTracks();
                 driver.sequenceOn(sadData);
             }
             else if(gameState == 1)
             {
-                // change music to happy
                 stopAllDriverTracks();
                 driver.sequenceOn(happyData);
             }
