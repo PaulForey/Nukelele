@@ -10,10 +10,12 @@ package
 	 */
 	public class Player extends Entity 
 	{
+        private const LOADTIME:int = 0;
+
 		[Embed(source = "assets/uke.png")] private const UKE: Class;
 		private var sprite:Image,
 					speed: Number = 6,
-					loadtime: int = 30;
+					loadtimer: int = LOADTIME;
 					
 		public function Player(px:int, py:int) 
 		{
@@ -24,25 +26,25 @@ package
 		
 		public override function update():void
 		{
-			loadtime = loadtime > 0? loadtime-1:0;
+			loadtimer = loadtimer > 0? loadtimer-1:0;
 			x += speed * (int(Input.check(Key.RIGHT)) - int(Input.check(Key.LEFT)));
 			y += speed * (int(Input.check(Key.DOWN)) - int(Input.check(Key.UP)));
-			if(!loadtime){
+			if(!loadtimer){
 				if (Input.pressed(Key.A)) {
-					world.add(new Bullet(x + 8, y + 8, 0, 0));
-					loadtime = 30;
+					(world as GameWorld).queueBullet(new Bullet(x + 8, y + 8, 0, 0));
+					loadtimer = LOADTIME;
 				}
 				if (Input.pressed(Key.S)) {
-					world.add(new Bullet(x + 8, y + 8, 0, 1));
-					loadtime = 30;
+					(world as GameWorld).queueBullet(new Bullet(x + 8, y + 8, 0, 1));
+					loadtimer = LOADTIME;
 				}
 				if (Input.pressed(Key.D)) {
-					world.add(new Bullet(x + 8, y + 8, 0, 2));
-					loadtime = 30;
+					(world as GameWorld).queueBullet(new Bullet(x + 8, y + 8, 0, 2));
+					loadtimer = LOADTIME;
 				}
 				if (Input.pressed(Key.F)) {
-					world.add(new Bullet(x + 8, y + 8, 0, 3));
-					loadtime = 30;
+					(world as GameWorld).queueBullet(new Bullet(x + 8, y + 8, 0, 3));
+					loadtimer = LOADTIME;
 				}
 			}
 			//if (collide("bullet", x, y) && (world as GameWorld).currentGameState = 1) {

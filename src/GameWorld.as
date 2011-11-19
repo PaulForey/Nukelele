@@ -19,7 +19,7 @@ package
 		private var bullets: Vector.<Bullet>,
 					enemies : Vector.<Enemy>,
 					spawn : int = 1;
-		
+
 		public function GameWorld()
 		{
             driver.setBeatCallbackInterval(1);
@@ -37,14 +37,14 @@ package
 
         public function get gameState():int {return currentGameState;}
 		
-		public function queuebullet(x:Number, y:Number, angle:Number, note: int):void
+		public function queueBullet(b:Bullet):void
 		{
-			bullets.push(new Bullet(x, y, angle, note))
+			bullets.push(b)
 		}
 		
-		public function queueenemy(note:int):void
+		public function queueEnemy(e:Enemy):void
 		{
-			enemies.push(new Enemy(note));
+			enemies.push(e);
 		}
         private function setGameState(newState:int):void
         {
@@ -58,15 +58,18 @@ package
         {
             //var beatIndex:int = beatCounter % 16;
 			while (bullets.length) {
-				add(bullets.pop());
-				//***play sound here***
+				var b:Bullet = bullets.pop();
+                trace("audio about to play!");
+                Audio.play("playerShot" + b.note.toString());
+                trace("audio played!")
+                add (b);
 			}
 			while (enemies.length) {
 				add(enemies.pop());
 			}
 			this.getClass(Enemy, enemies);
 			while (enemies.length) {
-				(enemies.pop()).setFrame(beatCounter % 4);
+				(enemies.pop()).setFrame([0,1,2,2][beatCounter % 4]);
 			}
             // Stuff to happen every 16 beats (should be at the start of one bar)
             if(beatCounter % 16 == 0)
@@ -82,7 +85,7 @@ package
                 trace("every four bars!");
                 if (gameState == 0) {
 					for (var i:int = 0; i < spawn; i++)
-						queueenemy(int(Math.random() * 4));
+						queueEnemy(new Enemy(int(Math.random() * 4)));
 					//***maybe play a spawn sound here***
                     setGameState(1);
 					spawn++;

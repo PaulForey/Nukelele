@@ -1,6 +1,6 @@
 package
 {
-    import net.flashpunk.FP;
+    import net.flashpunk.Sfx;
     import org.si.sion.*;
     import org.si.sion.utils.SiONPresetVoice;
 
@@ -30,10 +30,15 @@ package
         //[Embed(source="assets/sfx/player_spawn.mp3")] private static var playerSpawn:Sound;
         //[Embed(source="assets/sfx/player_die.mp3")] private static var playerSpawn:Sound;
 
-        [Embed(source="assets/sfx/player_shot1.mp3")] private static const playerShot1:Class;  // f
-        [Embed(source="assets/sfx/player_shot2.mp3")] private static const playerShot2:Class;  // a
-        [Embed(source="assets/sfx/player_shot3.mp3")] private static const playerShot3:Class;  // c
-        [Embed(source="assets/sfx/player_shot4.mp3")] private static const playerShot4:Class;  // e
+        [Embed(source="assets/sfx/playerShot0.mp3")] private static const SFX_PLAYERSHOT0:Class;  // f
+        [Embed(source="assets/sfx/playerShot1.mp3")] private static const SFX_PLAYERSHOT1:Class;  // a
+        [Embed(source="assets/sfx/playerShot2.mp3")] private static const SFX_PLAYERSHOT2:Class;  // c
+        [Embed(source="assets/sfx/playerShot3.mp3")] private static const SFX_PLAYERSHOT3:Class;  // e
+
+        private static var playerShot0:Sfx = new Sfx(SFX_PLAYERSHOT0);
+        private static var playerShot1:Sfx = new Sfx(SFX_PLAYERSHOT1);
+        private static var playerShot2:Sfx = new Sfx(SFX_PLAYERSHOT2);
+        private static var playerShot3:Sfx = new Sfx(SFX_PLAYERSHOT3);
 
 
         // Public Methods:
@@ -70,7 +75,9 @@ package
 
         public static function play (sound:String):void
         {
+            trace(sound);
             Audio[sound].play();
+            trace(Audio[sound]);
         }
 
         public static function changeMusic(gameState:int):void
