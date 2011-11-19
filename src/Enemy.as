@@ -26,7 +26,7 @@ package
 			super(288 + 288 * Math.sin(time * xfreq), 120 + 120 * Math.sin(time * yfreq), sprite);
 			FP.tween(sprite, { alpha: 1 }, 0.1, { complete: function():void{ onscreen = true; } } );
 			this.note = note;
-			setHitbox(16, 16, -8, -8);
+			setHitbox(28, 28, -2, -2);
 			time = 0;
 		}
 		

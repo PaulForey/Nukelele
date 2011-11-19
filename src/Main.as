@@ -4,6 +4,7 @@ package
 	import flash.events.Event;
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
+    import net.flashpunk.utils.Key;
     import org.si.sion.*;
 	/**
 	 * ...
@@ -20,6 +21,7 @@ package
             Audio.init();
 			FP.world = new GameWorld();
 			FP.console.enable();
+            FP.console.toggleKey = Key.T;
 		}
 
 	}

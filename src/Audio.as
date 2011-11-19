@@ -71,8 +71,8 @@ package
             happyMML += "%6@3   v13 o3  $c4 c4 c4 c4;";                 // Closed hat pattern
             happyMML += "%6@5   v13 o4  $[f8 r8 c8 r8]7 f8 c8 f8 e8;";  // Bass pattern
 
-            sadMML =    "%6@1   v13 o3  $c8 c8 r4 c8 c8 r4;";           // Kick pattern
-            sadMML +=   "%6@2   v13 o3  $r4 c8 r16 c16 r4 c8 r16 c16;"; // Snare pattern
+            sadMML =    "%6@1   v13 o3  $c4 r4 r8 c8 r4;";           // Kick pattern
+            sadMML +=   "%6@2   v15 o3  $r4 c8 r16 c16 r4 c4;"; // Snare pattern
             sadMML +=   "%6@4   v13 o3  $c8 c8 c8 c8;";                 // Open hat pattern
             sadMML +=   "%6@5   v9  o2  $[d8 r8>a8<r8]7 d8>a8<d8 e8;";  // Bass pattern
 

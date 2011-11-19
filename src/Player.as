@@ -22,7 +22,7 @@ package
 		{
 			sprite = new Spritemap(UKE,32,64);
 			super(px, py, sprite);
-			setHitbox(16, 48, -8, -8);
+			setHitbox(14, 26, -9, -33);
 		}
 		
 		public override function update():void
