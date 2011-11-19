@@ -31,10 +31,10 @@ package
         private static var enemySpawn:Bfxr = new Bfxr();
         private static var enemyDie:Bfxr = new Bfxr();
 
-        private static const enemyShot0:Array = new Array(53, presetVoices['lead36'], 2);
-        private static const enemyShot1:Array = new Array(57, presetVoices['lead36'], 2);
-        private static const enemyShot2:Array = new Array(60, presetVoices['lead36'], 2);
-        private static const enemyShot3:Array = new Array(64, presetVoices['lead36'], 2);
+        private static const enemyShot0:Array = new Array(65, presetVoices['lead16'], 2);
+        private static const enemyShot1:Array = new Array(69, presetVoices['lead16'], 2);
+        private static const enemyShot2:Array = new Array(72, presetVoices['lead16'], 2);
+        private static const enemyShot3:Array = new Array(76, presetVoices['lead16'], 2);
 
         [Embed(source="assets/sfx/playerSpawn.mp3")] private static const SFX_PLAYERSPAWN:Class;
         [Embed(source="assets/sfx/playerDie.mp3")] private static const SFX_PLAYERDIE:Class;

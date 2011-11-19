@@ -57,12 +57,12 @@ package
 
         private function onTimerInterrupt():void
         {
+            var enemyShotFired:Boolean = false;
+
 			while (bullets.length) {
 				var b:Bullet = bullets.pop();
                 if(b.owner == 0)
                     Audio.play("playerShot" + b.note.toString());
-                else
-                    Audio.play("enemyShot" + b.note.toString());
                 add (b);
 			}
 			while (enemies.length) {
@@ -83,7 +83,11 @@ package
 				while (v.length) {
 					var e:Enemy = v.pop();
 					if (e.note == toShoot) {
-						//***play enemy shoot sound***
+                        if (!enemyShotFired)
+                        {
+                            Audio.play("enemyShot" + e.note.toString());
+                            enemyShotFired = true;
+                        }
 						e.shoot(player.x, player.y);
 					}
 				}
@@ -104,8 +108,10 @@ package
                 else if(gameState == 1)
                     setGameState(0);
 
-                //Audio.changeMusic(currentGameState);
+                Audio.changeMusic(currentGameState);
             }
+
+
             beatCounter++;
         }
 	}

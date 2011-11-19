@@ -42,6 +42,7 @@ package
 				var bul:Bullet = collide("bullet", x, y) as Bullet;
 				if (bul) {
 					if (bul.note == note && bul.owner!=1){
+                        Audio.play("enemyDie");
 						world.remove(this);
 						world.remove(bul);
 						//particles
