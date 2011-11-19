@@ -2,7 +2,7 @@ package
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
-	import net.flashpunk.graphics.Stamp;
+	import net.flashpunk.graphics.Image;
 	/**
 	 * ...
 	 * @author Rob
@@ -11,15 +11,22 @@ package
 	{
 		[Embed(source = "assets/enemy.png")] private const ENEMY:Class;
 		private var onscreen: Boolean = false,
-					sprite: Stamp,
-					note: int;
-		public function Enemy(note: int, px:int)
+					sprite: Image,
+					note : int,
+					time : Number,
+					xphase : Number,
+					yphase : Number;
+		public function Enemy(note: int)
 		{
-			sprite = new Stamp(ENEMY);
-			super(px, -32, sprite);
-			FP.tween(this, { y: 32 }, 1, { complete: function():void{ onscreen = true; } } );
+			sprite = new Image(ENEMY);
+			sprite.alpha = 0;
+			xphase = 0.01 + Math.random() / 40;
+			yphase = 0.01 + Math.random() / 20;
+			super(288 + 288 * Math.sin(time * xphase), 120 + 120 * Math.sin(time * yphase), sprite);
+			FP.tween(sprite, { alpha: 1 }, 0.1, { complete: function():void{ onscreen = true; } } );
 			this.note = note;
 			setHitbox(16, 16, -8, -8);
+			time = 0;
 		}
 		
 		public override function update(): void
@@ -36,6 +43,9 @@ package
 					}
 				}
 			}
+			x = 288 + 288 * Math.sin(time * xphase);
+			y = 120 + 120 * Math.sin(time * yphase);
+			time++;
 		}
 	}
 }
