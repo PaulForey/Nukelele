@@ -90,14 +90,14 @@ package
                 if (gameState == 0) {
 					for (var i:int = 0; i < spawn; i++)
 						queueEnemy(new Enemy(int(Math.random() * 4)));
-					//***maybe play a spawn sound here***
+					Audio.play("enemySpawn");
                     setGameState(1);
 					spawn++;
 				}
                 else if(gameState == 1)
                     setGameState(0);
 
-                //Audio.changeMusic(currentGameState);
+                Audio.changeMusic(currentGameState);
             }
             beatCounter++;
         }

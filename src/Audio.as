@@ -1,6 +1,7 @@
 package
 {
     import net.flashpunk.Sfx;
+    import com.increpare.bfxr.Bfxr;
     import org.si.sion.*;
     import org.si.sion.utils.SiONPresetVoice;
 
@@ -24,37 +25,48 @@ package
 
 
         // Sound effects:
-        //[Embed(source="assets/sfx/enemy_spawn.mp3")] private static var enemySpawn:Sound;
-        //[Embed(source="assets/sfx/enemy_die.mp3")] private static var enemyDie:Sound;
+        private static const enemySpawnData:String = "1,0.5,0.0003,0.01,0.0679,0.495,0.75,0.615,,0.1074,-0.4496,0.4769,0.385,0.7683,0.7888,0.9061,0.2067,0.109,0.4457,0.4055,0.0509,-0.9254,0.7634,-0.468,-0.7258,0.9287,0.9537,0.9086,,0.3049,0.0897,-0.4947,0.05"
+        private static const enemyDieData:String = "1,0.5,0.1,0.01,0.084,0.815,0.5847,0.186,,0.1684,,0.2062,0.5859,0.272,0.4682,0.3516,-0.5873,0.4615,0.1054,0.5078,0.0775,-0.0314,0.2399,-0.9011,-0.1715,0.9193,0.2426,0.0513,0.0092,0.6699,,-0.617,0.05";
 
-        //[Embed(source="assets/sfx/player_spawn.mp3")] private static var playerSpawn:Sound;
-        //[Embed(source="assets/sfx/player_die.mp3")] private static var playerSpawn:Sound;
+        private static var enemySpawn:Bfxr = new Bfxr();
+        private static var enemyDie:Bfxr = new Bfxr();
+
+        [Embed(source="assets/sfx/playerSpawn.mp3")] private static const SFX_PLAYERSPAWN:Class;
+        [Embed(source="assets/sfx/playerDie.mp3")] private static const SFX_PLAYERDIE:Class;
 
         [Embed(source="assets/sfx/playerShot0.mp3")] private static const SFX_PLAYERSHOT0:Class;  // f
         [Embed(source="assets/sfx/playerShot1.mp3")] private static const SFX_PLAYERSHOT1:Class;  // a
         [Embed(source="assets/sfx/playerShot2.mp3")] private static const SFX_PLAYERSHOT2:Class;  // c
         [Embed(source="assets/sfx/playerShot3.mp3")] private static const SFX_PLAYERSHOT3:Class;  // e
 
+        private static var playerSpawn:Sfx = new Sfx(SFX_PLAYERSPAWN);
+        private static var playerDie:Sfx = new Sfx(SFX_PLAYERDIE);
+
         private static var playerShot0:Sfx = new Sfx(SFX_PLAYERSHOT0);
         private static var playerShot1:Sfx = new Sfx(SFX_PLAYERSHOT1);
         private static var playerShot2:Sfx = new Sfx(SFX_PLAYERSHOT2);
         private static var playerShot3:Sfx = new Sfx(SFX_PLAYERSHOT3);
 
-
         // Public Methods:
         public static function init(thatDriver:SiONDriver):void
         {
+            enemySpawn.Load(enemySpawnData);
+            enemySpawn.CacheMutations(0.05, 4);
+
+            enemyDie.Load(enemyDieData);
+            enemyDie.CacheMutations(0.05, 4);
+
             driver = thatDriver;
 
             happyMML =  "%6@1   v13 o3  $c4 r4 c4 r4;";                 // Kick pattern
             happyMML += "%6@2   v13 o3  $r4 c4 r4 c4;";                 // Snare pattern
             happyMML += "%6@3   v13 o3  $c4 c4 c4 c4;";                 // Closed hat pattern
-            happyMML += "%6@5   v13 o4  $[f8 r8 c8 r8]7 f8 c8 f8 e8;";// Bass pattern
+            happyMML += "%6@5   v13 o4  $[f8 r8 c8 r8]7 f8 c8 f8 e8;";  // Bass pattern
 
             sadMML =    "%6@1   v13 o3  $c8 c8 r4 c8 c8 r4;";           // Kick pattern
             sadMML +=   "%6@2   v13 o3  $r4 c8 r16 c16 r4 c8 r16 c16;"; // Snare pattern
             sadMML +=   "%6@4   v13 o3  $c8 c8 c8 c8;";                 // Open hat pattern
-            sadMML +=   "%6@5   v13 o4  $[d8 r8>a8<r8]7 d8>a8<d8 e8;";// Bass pattern
+            sadMML +=   "%6@5   v9  o2  $[d8 r8>a8<r8]7 d8>a8<d8 e8;";  // Bass pattern
 
             happyData = driver.compile(happyMML);
             sadData = driver.compile(sadMML);
@@ -66,16 +78,20 @@ package
             happyData.setVoice(4, percusVoices[16]);                // open hat
             happyData.setVoice(5, presetVoices['valsound.bass16']); // bass
 
-            sadData.setVoice(1, percusVoices[1]);                   // Kick drum
-            sadData.setVoice(2, percusVoices[27]);                  // snare drum
+            sadData.setVoice(1, percusVoices[5]);                   // Kick drum
+            sadData.setVoice(2, percusVoices[30]);                  // snare drum
             sadData.setVoice(3, percusVoices[15]);                  // closed hat
             sadData.setVoice(4, percusVoices[16]);                  // open hat
-            sadData.setVoice(5, presetVoices['valsound.bass16']);   // bass      
+            sadData.setVoice(5, presetVoices['valsound.lead31']);   // bass      
         }
 
         public static function play (sound:String):void
         {
-            Audio[sound].play();
+            if(Audio[sound] is Bfxr)
+                Audio[sound].Play(0.3);
+            else
+                Audio[sound].play();
+                trace("audio played!");
         }
 
         public static function changeMusic(gameState:int):void
@@ -83,12 +99,12 @@ package
             if(gameState == 0)
             {
                 stopAllDriverTracks();
-                driver.sequenceOn(sadData);
+                driver.sequenceOn(happyData);
             }
             else if(gameState == 1)
             {
                 stopAllDriverTracks();
-                driver.sequenceOn(happyData);
+                driver.sequenceOn(sadData);
             }
         }
 
