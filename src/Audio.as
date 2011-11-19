@@ -8,7 +8,7 @@ package
     public class Audio
     {
         // Public variables:
-        public static var tempo:int = 160;
+        public static var tempo:int = 300;
 
         // Private variables:
         private static var driver:SiONDriver;
@@ -62,6 +62,8 @@ package
             enemyDie.Cache();
 
             driver = thatDriver;
+
+            driver.bpm = tempo;
 
             happyMML =  "%6@1   v13 o3  $c4 r4 c4 r4;";                 // Kick pattern
             happyMML += "%6@2   v13 o3  $r4 c4 r4 c4;";                 // Snare pattern

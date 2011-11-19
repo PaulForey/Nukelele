@@ -9,7 +9,7 @@ package
 	 */
 	public class GameWorld extends World 
 	{
-        private var driver:SiONDriver = new SiONDriver();
+        private var driver:SiONDriver;
 
         private var currentGameState:int = 0;
 
@@ -20,17 +20,17 @@ package
 					spawn : int = 1,
 					player: Player;
 
-		public function GameWorld()
+		public function GameWorld(thatDriver:SiONDriver)
 		{
+            driver = thatDriver;
+
             driver.setBeatCallbackInterval(1);
             driver.setTimerInterruption(1, onTimerInterrupt);
-
-            Audio.init(driver);
 
 			bullets = new Vector.<Bullet>();
 			enemies = new Vector.<Enemy>();
 
-            driver.play("t" + Audio.tempo.toString() + ";");
+            driver.play();
 
 			player = new Player(320, 240);
 			add(player);
