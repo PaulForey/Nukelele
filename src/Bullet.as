@@ -2,6 +2,7 @@ package
 {
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
+	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.graphics.Stamp;
 	/**
 	 * ...
@@ -9,14 +10,17 @@ package
 	 */
 	public class Bullet extends Entity
 	{
-		[Embed(source = "assets/shot.png")] private const SHOT : Class;
+		[Embed(source = "assets/shotsheet.png")] private const SHOT : Class;
 		public var note: int;
-		private var sprite: Stamp,
+		private var sprite: Spritemap,
 					velocity: Point,
 					speed : Number = 5;
 		public function Bullet(px: Number, py: Number, angle: Number, note: int)
 		{
-			sprite = new Stamp(SHOT);
+			sprite = new Spritemap(SHOT, 8, 32);
+			sprite.add("this", [note]);
+			sprite.play("this");
+			sprite.angle = angle * 180 / (2 * Math.PI);
 			super(px, py, sprite);
 			velocity = new Point(speed * Math.sin(angle), -speed * Math.cos(angle));
 			type = "bullet";
@@ -30,7 +34,5 @@ package
 			x += velocity.x;
 			y += velocity.y;
 		}
-		
 	}
-
 }
