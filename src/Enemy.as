@@ -21,8 +21,8 @@ package
 		{
 			sprite = new Spritemap(ENEMY, 32, 32);
 			sprite.alpha = 0;
-			xfreq = 0.01 + Math.random() / 105;
-			yfreq = 0.01 + Math.random() / 70;
+			xfreq = 0.005 + Math.random() / 150;
+			yfreq = 0.005 + Math.random() / 100;
 			super(288 + 288 * Math.sin(time * xfreq), 120 + 120 * Math.sin(time * yfreq), sprite);
 			FP.tween(sprite, { alpha: 1 }, 0.1, { complete: function():void{ onscreen = true; } } );
 			this.note = note;
