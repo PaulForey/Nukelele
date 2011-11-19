@@ -75,23 +75,38 @@ package
 			player.setFrame([0, 1, 2, 1][beatCounter % 4]);
 			
             // Stuff to happen every 16 beats (should be at the start of one bar)
-            if(gameState == 1 && (beatCounter % 8)==0)
+            if(gameState == 1)
             {
-				var v : Vector.<Enemy> = new Vector.<Enemy>(),
-					toShoot : int = Math.random() * 4;
-				getClass(Enemy, v);
-				while (v.length) {
-					var e:Enemy = v.pop();
-					if (e.note == toShoot) {
-                        if (!enemyShotFired)
-                        {
-                            Audio.play("enemyShot" + e.note.toString());
-                            enemyShotFired = true;
-                        }
+				if((beatCounter % 16)==0){
+					var v : Vector.<Enemy> = new Vector.<Enemy>(),
+						toShoot: int = (beatCounter%64) / 16;
+					trace(toShoot);
+					getClass(Enemy, v);
+					
+					while (v.length) {
+						var e:Enemy = v.pop();
+						if (e.note == toShoot) {
+							if (!enemyShotFired)
+							{
+								Audio.play("enemyShot" + e.note.toString());
+								enemyShotFired = true;
+							}
+							e.shoot(player.x, player.y);
+						}
+					}
+				}
+				else{
+					v = new Vector.<Enemy>();
+					getClass(Enemy, v);
+					trace(v.length);
+					if (Math.random() < 0.01 && v.length) {
+						e = v[int(v.length * Math.random())];
 						e.shoot(player.x, player.y);
+						//Audio.play("enemyShot" + e.note.toString());
 					}
 				}
             }
+
 
             // Stuff to happen every 4 bars
             if(beatCounter % 64 == 0)
@@ -110,8 +125,6 @@ package
 
                 Audio.changeMusic(currentGameState);
             }
-
-
             beatCounter++;
         }
 	}
