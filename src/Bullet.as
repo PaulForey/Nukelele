@@ -11,21 +11,23 @@ package
 	public class Bullet extends Entity
 	{
 		[Embed(source = "assets/shotsheet.png")] private const SHOT : Class;
-		public var note: int;
+		public var note: int,
+					owner: int;
 		private var sprite: Spritemap,
 					velocity: Point,
 					speed : Number = 5;
-		public function Bullet(px: Number, py: Number, angle: Number, note: int)
+		public function Bullet(px: Number, py: Number, angle: Number, note: int, owner:int)
 		{
 			sprite = new Spritemap(SHOT, 8, 40);
 			sprite.add("this", [note]);
 			sprite.play("this");
-			sprite.angle = angle * 180 / (2 * Math.PI);
+			sprite.angle = -angle * (180 /  Math.PI);
 			super(px, py, sprite);
 			velocity = new Point(speed * Math.sin(angle), -speed * Math.cos(angle));
 			type = "bullet";
 			this.note = note;
-			setHitbox(8, 32, -4, 0);
+			setHitbox(8, 8, -4, 0);
+			this.owner = owner;
 			//play sound looping somewhere in here or in update
 		}
 		
